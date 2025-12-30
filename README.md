@@ -14,7 +14,7 @@
 - **For You:** **You didn’t just learn AI—you made it *fun***. Now go **shred the leaderboard**.
 
 **🚀 How to Use:**
-1. **Clone & Run:** `git clone [this-repo]` → `pip install -r requirements.txt` → **shred**.
+1. **Clone & Run:** `git clone [this-repo]` → don't forget to `pip install <requirements>` if any → **shred**.
 2. **Tweak & Break:** Every script has **experiments**—try them!
 3. **Flex & Teach:** Use the lectures to **explain AI to your mates** (or your cat).
 
