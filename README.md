@@ -18,7 +18,7 @@
 2. **Tweak & Break:** Every script has **experiments**—try them!
 3. **Flex & Teach:** Use the lectures to **explain AI to your mates** (or your cat).
 
-**🤙 Pro Tip:** Start with [`w1_dfs_dfs.md`](w1_dfs_dfs.md) (maze solving) or [`w9_q_learning_reward_system.md`](w9_q_learning_reward_system.md) (puppy training for AI). Then **go wild**.
+**🤙 Pro Tip:** Start with [`w1_dfs_dfs.md`](w1_dfs_dfs.md) (maze solving) and work your way to [`w9_q_learning_reward_system.md`](w9_q_learning_reward_system.md) (puppy training for AI). Then **go wild**.
 
 ---
 *"Logic is just knowing the rules and having the patience to follow them. Slay."* 🔥
