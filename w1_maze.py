@@ -87,4 +87,29 @@ solve_dfs((0, 0))
 # 
 # 7. **Finding the Exit**: If the robot finds the exit (`9`), it prints "EXIT FOUND!" and we're done!
 # 
-# 8. **The Hack**: Change `stack.pop()` to `stack.pop(0)`. This turns DFS into **Breadth-First Search (BFS)**! Observe how the "Checking square" order changes. Which one feels more 'organized'? BFS is the safe bet; DFS is the YOLO move. Choose your fighter.
+# 8. **The Hack**: Try turning DFS into **Breadth-First Search (BFS)**! Observe how the "Checking square" order changes. Which one feels more 'organized'? BFS is the safe bet; DFS is the YOLO move. Choose your fighter.
+# def solve_bfs(start_pos):
+#     queue = [start_pos]               # start with (0,0) at the front of the line
+#     visited = set()
+
+#     while queue:                      # keep going as long as there's people in line
+#         x, y = queue.pop(0)           # pop(0) grabs the FIRST thing in line (oldest spot)
+        
+#         if (x, y) in visited:         # already been here? skip
+#             continue
+        
+#         visited.add((x, y))
+#         print(f"Checking square: ({x}, {y})")
+        
+#         if maze[x][y] == 9:
+#             print("EXIT FOUND! W 🏁")
+#             return True
+        
+#         for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+#             nx = x + dx
+#             ny = y + dy
+#             if 0 <= nx < 5 and 0 <= ny < 5 and maze[nx][ny] != 1:
+#                 queue.append((nx, ny))    # add to the BACK of the line (wait your turn!)
+    
+#     print("NO EXIT FOUND 😢")
+#     return False
