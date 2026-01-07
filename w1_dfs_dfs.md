@@ -1,16 +1,16 @@
-# 🌊 **W1: Digital Hide & Seek: DFS & BFS** 🌊
+# 🌊 Digital Hide & Seek: DFS & BFS 🌊
 
-Alright, little groms! 🏄‍♂️ Today we're gonna learn about **Depth-First Search (DFS)** and **Breadth-First Search (BFS)**—two super cool methods for finding stuff in a maze! Imagine you're a little robot trying to find the "Exit" in a simple grid. Let's dive in!
+Alright little groms! 🏄‍♂️  
+Today we're shreddin' two legendary ways to explore a maze: **Depth-First Search (DFS)** and **Breadth-First Search (BFS)**.  
+Think of yourself as a tiny robot tryna find the shiny **EXIT** in a grid full of walls and open paths.
 
-## **The Maze**
+## The Maze Setup
 
-First, let's look at our maze. It's a simple grid where:
+Our maze is a simple **5×5 grid**:
 
-- `0` means you can walk on it.
-- `1` means there's a wall, and you can't walk through it.
-- `9` is the exit you're trying to find.
-
-Here's what our maze looks like:
+- `0` = open path (soft sand, you can walk here)  
+- `1` = wall (big fuck-off brick, can't go through)  
+- `9` = the EXIT (treasure chest, jackpot!)
 
 ```
 0 1 0 0 0
@@ -20,83 +20,115 @@ Here's what our maze looks like:
 0 0 0 0 9
 ```
 
-## **Depth-First Search (DFS)**
+Start position: top-left → (0, 0)  
+Goal: bottom-right → (4, 4) with the sweet 9
 
-DFS is like exploring a maze by going as deep as you can before backtracking. Imagine you're in a maze, and you want to find the exit. You start at the beginning and keep moving forward until you hit a dead end. Then you backtrack and try a different path. This is what DFS does!
+Allowed moves: up, down, left, right (no diagonals, keep it classic)
 
-### **How DFS Works**
+## Depth-First Search (DFS) – The YOLO Adventurer 🏄‍♂️💥
 
-1. **The "To-Do" List**: The robot keeps track of places to check using a list called `stack`.
-2. **The "Checked" List**: The robot keeps track of places it has already checked using a set called `visited`.
-3. **Checking Squares**: The robot checks each square in the maze and prints where it's checking.
-4. **Finding the Exit**: If the robot finds the exit (`9`), it prints "EXIT FOUND!" and we're done!
+DFS is like ridin' one gnarly wave as deep as you can until you slam into the beach, then paddle back and try the next one.  
+Chaotic energy, might find the exit fast or get cooked in a dead-end for ages.
 
-Here's a simple example of how DFS works:
+### How DFS works (super simple breakdown)
+- Uses a **stack** → like a tower of pancakes. Last pancake you add is the first you eat (LIFO = Last In First Out)  
+- Keeps divin' deeper down one path before tryin' others  
+- Backtracks when it hits a wall or dead end
 
-```python
+```
 def solve_dfs(start_pos):
-    stack = [start_pos]
-    visited = set()
+    stack = [start_pos]               # start by putting (0,0) on the stack (our pancake tower)
+    visited = set()                   # empty set to remember spots we've already checked (no duplicates)
 
-    while stack:
-        x, y = stack.pop()
-        if (x, y) in visited:
+    while stack:                      # keep going as long as there's stuff left on the stack
+        x, y = stack.pop()            # pop() grabs the LAST thing you added (top of the tower)
+        
+        if (x, y) in visited:         # already checked this spot? skip it, don't waste time
             continue
-        visited.add((x, y))
+        
+        visited.add((x, y))           # mark this spot as visited (add to our sticker book)
         print(f"Checking square: ({x}, {y})")
-        if maze[x][y] == 9:
+        
+        if maze[x][y] == 9:           # jackpot! we found the exit
             print("EXIT FOUND! W 🏁")
             return True
+        
+        # Check 4 directions: right, down, left, up
         for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-            nx, ny = x + dx, y + dy
+            nx = x + dx                   # new x coordinate
+            ny = y + dy                   # new y coordinate
+            # Make sure it's inside the maze and not a wall
             if 0 <= nx < 5 and 0 <= ny < 5 and maze[nx][ny] != 1:
-                stack.append((nx, ny))
+                stack.append((nx, ny))    # add new spot to the TOP of the stack (dive deeper!)
+    
     print("NO EXIT FOUND 😢")
     return False
 ```
 
-## **Breadth-First Search (BFS)**
+## Breadth-First Search (BFS) – The Organized Wave 🌊📏
 
-BFS is like exploring a maze by checking all the neighbors at the current depth before moving on to the next depth. Imagine you're in a maze, and you want to find the exit. You start at the beginning and check all the neighbors before moving to the next level. This is what BFS does!
+BFS is like droppin' a pebble in a puddle – ripples spread out evenly, checking every close spot first.  
+Systematic as fuck, always finds the shortest path in this kind of maze.
 
-### **How BFS Works**
+### How BFS works (super simple breakdown)
+- Uses a **queue** → like a line at the ice cream truck. First kid in line gets served first (FIFO = First In First Out)  
+- Checks all neighbors at the current distance before moving farther out  
+- Level by level, no rushin' deep into one path
 
-1. **The "To-Do" List**: The robot keeps track of places to check using a list called `queue`.
-2. **The "Checked" List**: The robot keeps track of places it has already checked using a set called `visited`.
-3. **Checking Squares**: The robot checks each square in the maze and prints where it's checking.
-4. **Finding the Exit**: If the robot finds the exit (`9`), it prints "EXIT FOUND!" and we're done!
-
-Here's a simple example of how BFS works:
-
-```python
+```
 def solve_bfs(start_pos):
-    queue = [start_pos]
+    queue = [start_pos]               # start with (0,0) at the front of the line
     visited = set()
 
-    while queue:
-        x, y = queue.pop(0)
-        if (x, y) in visited:
+    while queue:                      # keep going as long as there's people in line
+        x, y = queue.pop(0)           # pop(0) grabs the FIRST thing in line (oldest spot)
+        
+        if (x, y) in visited:         # already been here? skip
             continue
+        
         visited.add((x, y))
         print(f"Checking square: ({x}, {y})")
+        
         if maze[x][y] == 9:
             print("EXIT FOUND! W 🏁")
             return True
+        
         for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
-            nx, ny = x + dx, y + dy
+            nx = x + dx
+            ny = y + dy
             if 0 <= nx < 5 and 0 <= ny < 5 and maze[nx][ny] != 1:
-                queue.append((nx, ny))
+                queue.append((nx, ny))    # add to the BACK of the line (wait your turn!)
+    
     print("NO EXIT FOUND 😢")
     return False
 ```
 
-## **The Hack**
+## The Legendary One-Line Hack 🤙
 
-You can turn DFS into BFS by changing `stack.pop()` to `stack.pop(0)`. This changes the order in which the robot checks the squares. Observe how the "Checking square" order changes. Which one feels more 'organized'? BFS is the safe bet; DFS is the YOLO move. Choose your fighter!
+Want DFS to become BFS with almost zero effort?  
+Just change how you grab the next spot:
 
-## **Summary**
+```
+# DFS (deep first):
+x, y = stack.pop()          # grabs the most recent addition
 
-- **DFS**: Go as deep as you can before backtracking.
-- **BFS**: Check all neighbors at the current depth before moving on.
+# BFS (level by level):
+x, y = queue.pop(0)         # grabs the oldest addition
+```
 
-Both methods are super cool, and they help us find stuff in a maze! Now you know how to use DFS and BFS to find the exit. Keep shredding, little groms! 🌊🏄‍♂️
+Same code, different personality.  
+DFS = chaotic fun, might get lucky or fucked  
+BFS = safe, methodical, shortest path guaranteed
+
+## Quick Summary – Choose Your Fighter
+
+Feature              | DFS (YOLO)                     | BFS (Organized)                  
+---------------------|--------------------------------|----------------------------------
+Data Structure       | Stack (pancake tower)          | Queue (ice cream line)           
+Order                | Last In, First Out             | First In, First Out              
+Exploration Style    | Deep first, backtrack          | Level by level, ripples          
+Shortest Path?       | Nope                           | Hell yeah (unweighted maze)      
+Memory usage         | Usually lower                  | Usually higher                   
+Vibe                 | "Fuck it, let's go this way"   | "Let's check everything nearby"  
+
+Keep shreddin' those mazes, little grom!  
